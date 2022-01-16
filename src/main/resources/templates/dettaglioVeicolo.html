@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here" />
+
+
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!--LEAFLET-->
+<link rel="stylesheet"
+	href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+	integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+	crossorigin="" />
+
+
+
+
+<!--GRAFICO (NON SO SE è QUELLO GIUSTO)-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js" />
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"
+	integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet" href="/style_pagSingola.css">
+<link href='https://fonts.googleapis.com/css?family=Merienda One'
+	rel='stylesheet'>
+
+<title>Dettaglio</title>
+</head>
+
+<body>
+	<div class="container my-3">
+
+		<script th:replace="/header"></script>
+
+		<!--<div class="separatore"></div>
+
+		SEZIONE IMG + DESCRIZIONE-->
+		<div class="row d-flex align-items-center my-4" id="intro">
+
+			<div
+				class="vstack gap-2 col-lg-6 mx-auto sectionText d-flex flex-column text-center row my-4 ">
+
+
+				<div>
+					<h1 th:text="${veicolo.modello}"></h1>
+					<h4 th:text="${veicolo.alimentazione}"></h4>
+					<br>
+					<!--    qua forse elenco?-->
+
+					<p th:text="${veicolo.descrizione}"></p>
+
+
+				</div>
+				<div>
+					<button th:if="${tipo}" type="button" class="btn"
+						style="color: white; background-color: #009EE3;"
+						data-bs-toggle="modal" data-bs-target="#staticBackdrop1"
+						onclick="static">Prenota Veicolo</button>
+				</div>
+				<p th:unless="${tipo}">
+					<strong> Per prenotare un veicolo devi essere registrato </strong>
+				</p>
+
+				<p th:if="${errore}">
+					<strong> Hai già una prenotazione attiva!</strong>
+				</p>
+
+
+
+			</div>
+
+			<br> <br>
+			<div class="col-lg-6  order-lg-1 sectionImage row my-4">
+
+				<!--	<img class="img-fluid" src="/imgs/500.jpg" alt="computer" id="imgVeicolo">-->
+
+
+				<img class="img-fluid" th:src="${veicolo.immagine}+ '/main.jpeg'"
+					alt="Foto veicolo">
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+			<!-- QUESTO RIMANDA ALLA HOME, QUINDI HO PROVATO A METTERCI UN MODAL
+					<div><a class="btn btn-primary" href="/addPrenotazione" role="button" id="prenota">Prenota Veicolo</a></div> -->
+
+		</div>
+
+
+
+
+
+
+
+		<!--<div class="separatore"></div>-->
+
+
+		<!--SEZIONE TABELLA DISPONIBILITA'
+
+		<div class="row d-flex align-items-center my-4">
+
+			<table class="table table-striped ">
+				<thead>
+					<tr class="bg-primary">
+						<th scope="col">ID Veicolo</th>
+						<th scope="col">Modello</th>
+						<th scope="col">Tipologia</th>
+						<th scope="col">Alimentazione</th>
+						<th scope="col">Posizione</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td th:text="${veicolo.id_veicolo}" />
+						<td th:text="${veicolo.modello}" />
+						<td th:text="${veicolo.tipologia}" />
+						<td th:text="${veicolo.alimentazione}" />
+						<td th:text="${veicolo.posizione}" />
+					</tr>
+				</tbody>
+			</table> 
+		</div>-->
+
+		<div class="separatore"></div>
+
+		<!--SEZIONE MAPPA-->
+		<div class="d-flex flex-column">
+
+			<div class=" text-center ">
+				<h3>Dove si trova il tuo veicolo?</h3>
+				<br>
+			</div>
+
+			<div class="container">
+
+				<div class="row my-3">
+					<div id="mapid"></div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="separatore"></div>
+
+
+		<!--SEZIONE CONSUMI-->
+
+		<div class="row d-flex align-items-center my-4" id="consumi">
+
+			<div class="row sectionText d-flex flex-column text-center row my-4 ">
+				<h3>Perchè scegliere l'elettrico</h3>
+				<br>
+				<p>​​Un veicolo elettrico riduce drasticamente l'emissione di
+					CO2 e di polveri sottili durante la guida, migliorando la qualità
+					dell’aria e, di conseguenza, la salute delle persone. Inoltre, i
+					mezzi elettrici sono silenziosi e ciò consente di limitare
+					l’inquinamento acustico. Insomma, l’elettrico fa bene a te e
+					all’ambiente, perché non sceglierlo?</p>
+			</div>
+
+			<div class="col-lg-3 sectionImage row d-none d-lg-block">
+
+				<img class="img-fluid" src="/imgs/PaginaSingolaSx2.png"
+					alt="computer" id="imgVeicolo">
+
+			</div>
+
+			<div class="col-lg-6 row">
+
+				<canvas id="myChart"></canvas>
+
+			</div>
+
+			<div class="col-lg-3 sectionImage row d-none d-lg-block">
+
+				<img class="img-fluid" src="/imgs/PaginaSingolaDx2.png"
+					alt="computer" id="imgVeicolo">
+
+			</div>
+
+
+
+		</div>
+
+		<!--
+        <div class="row d-flex align-items-center my-4">
+
+            <div class="row sectionText d-flex flex-column text-center row my-4 ">
+                <h3>Perchè scegliere l'elettrico</h3>
+            </div>
+
+
+            <div class="row my-4">
+
+                <canvas id="myChart"></canvas>
+
+            </div> 
+
+
+
+
+
+
+        </div> -->
+
+	</div>
+
+	<!-- Modal NON SO PERCHè DA JAVA NON VADA-->
+	<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-start" id="staticBackdropLabel">Prosegui
+						con la prenotazione</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+
+
+				<div class="modal-body ">
+
+					<form id="credit" action="/start/prenotazione" method="post"
+						th:object="${prenotation}">
+
+						<input type="hidden" name="veicolo_id"
+							th:value="${veicolo.id_veicolo}">
+
+
+						<div class="mb-3">
+							<label for="carta" class="form-label">Metodo di pagamento</label>
+							<select name="" id="carta" class="form-select"
+								aria-label="Default select example">
+								<option value="null" disabled selected>Seleziona</option>
+								<option value="visa">VISA</option>
+								<option value="master">MASTERCARD</option>
+								<option value="american">AMERICAN EXPRESS</option>
+							</select>
+						</div>
+						<div class="mb-4">
+							<label for="nCarta" class="form-label">Numero carta</label> <input
+								type="text" name="nCarta" id="nCarta"
+								placeholder="inserisci numero carta" class="form-control "
+								maxlength="19" pattern="\d*">
+						</div>
+						<div class="col-12 d-flex justify-content-end">
+							<button type="button" class="btn btn-secondary me-2"
+								data-bs-dismiss="modal">Chiudi</button>
+							<button type="submit" class="btn"
+								style="color: white; background-color: #009EE3;">Conferma</button>
+						</div>
+						<!--<select name="" id="carta">
+						<option value="null" disabled selected>Metodo di pagamento</option>
+						<option value="visa">VISA</option>
+						<option value="master">MASTERCARD</option>
+						<option value="american">AMERICAN EXPRESS</option>
+						<br>
+					</select> 
+					<input type="text" name="nCarta" id="nCarta"
+						placeholder="inserisci numero carta">
+					
+					<div class="form-group row">
+						<label for="data_inizio" class="col-sm-2 col-form-label">Data</label>
+						<div class="col-sm-10">
+							<input type="date" name="start_date" placeholder="data inizio"></div>
+					</div>
+					
+
+					<div class="form-group row">
+						<label for="start_time" class="col-sm-2 col-form-label">Ora</label>
+
+						<div class="col-sm-10">
+							<input type="time" name="start_time" placeholder="ORA"></div>
+					</div>
+
+					
+					<select name="" id="carta">
+						<option value="null" disabled selected>Metodo di pagamento</option>
+						<option value="visa">VISA</option>
+						<option value="master">MASTERCARD</option>
+						<option value="american">AMERICAN EXPRESS</option>
+						<br>
+					</select> 
+					<input type="text" name="nCarta" id="nCarta"
+						placeholder="inserisci numero carta">
+	
+			</div>
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+				<button type="submit" class="btn" style="color:white; background-color: #009EE3;">Conferma</button>
+			</div>-->
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="separatore"></div>
+
+	<!--Footer-->
+	<footer class="text-lg-white py-2" style="background-color: #009EE3">
+		<div class="container" id="footer">
+
+			<div class="row">
+				<div
+					class="sectionText text-center d-flex col-sm-6 justify-content-sm-start justify-content-center  align-items-center">
+
+					<p class="text-white mb-0">e-anduma s.r.l. | P.I
+						ITA12345678900</p>
+
+				</div>
+
+				<div
+					class="d-flex col-sm-6 justify-content-sm-end justify-content-center align-items-center">
+					<a class="btn btn-floating m-1 text-white"
+						style="background-color: #009EE3" href="#!" role="button"> <i
+						class="fab fa-instagram"></i>
+					</a> <a class="btn btn-floating m-1 text-white"
+						style="background-color: #009EE3" href="#!" role="button"> <i
+						class="fab fa-facebook-f"></i>
+					</a> <a class="btn btn-floating m-1 text-white"
+						style="background-color: #009EE3" href="#!" role="button"> <i
+						class="fab fa-youtube"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!--Bootstrap-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous">
+	</script>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+		<!--     Leaflet -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+		integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+		crossorigin="">
+    </script>
+
+	<!--Grafico
+		dovìè il suo script?-->
+
+	<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+
+	var veicolo = /*[[${veicolo}]]*/ 'default';
+	/*]]>*/
+	
+	var blueIcon = new L.Icon({
+  	  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+  	  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  	  iconSize: [25, 41],
+  	  iconAnchor: [12, 41],
+  	  popupAnchor: [1, -34],
+  	  shadowSize: [41, 41]
+  	});
+	var inp = veicolo.posizione;
+	console.log(veicolo);
+	console.log(inp);
+	var xmlhttp = new XMLHttpRequest();
+	 	var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + inp;
+	 	xmlhttp.onreadystatechange = function(){
+	   		if (this.readyState == 4 && this.status == 200){
+	    		var risposta = JSON.parse(this.responseText);
+	    		console.log(risposta);
+		var mymap = L.map('mapid').setView([risposta[0].lat, risposta[0].lon], 13);
+		 var puntatore = L.marker([risposta[0].lat, risposta[0].lon], {icon: blueIcon}).addTo(mymap);	
+		 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			maxZoom: 18,
+			id: 'mapbox/streets-v11',
+			tileSize: 512,
+			zoomOffset: -1,
+			accessToken: 'pk.eyJ1IjoiY2lnbGllcnMiLCJhIjoiY2tybms3Y3prMG1rODJucnE4NWVxcWloNiJ9.eRFXIAo1z2bXBGegMd-7aA'
+		}).addTo(mymap);	 		
+			}
+ 	};
+ 	xmlhttp.open("GET", url, true);
+ 	xmlhttp.send();
+		
+
+
+		//GRAFICO
+		var ctx = document.getElementById('myChart').getContext('2d');
+
+		var mychart = new Chart(
+			ctx, {
+				type: 'doughnut',
+
+				options:{
+					plugins:{
+						legend:{
+							position:'bottom'
+						}
+					}
+
+				},
+
+				data: {
+
+					labels: ['I Nostri Veicoli elettrici',' I Nostri Veicoli a combustione' /*'Scooter', 'Scooter elettrico',*/
+						],
+
+					datasets: [{
+						label: 'my first dataset',
+						data: [75, 25
+],
+						backgroundColor: [
+						'rgb(0, 150, 0)',
+						'rgb(254, 50, 53)', 
+						 
+						/*'rgb(161, 0, 0)', 
+						'rgb(70, 188, 53)', 
+						
+						'rgb(0, 114, 0)'*/
+						],
+						hoverOffset: 4
+					}]
+				}
+			}
+
+		)
+
+		
+
+		$('input[name=nCarta]').keypress(function(){
+			var rawNumbers = $(this).val().replace(/ /g,'');
+			var cardLength = rawNumbers.length;
+			if(cardLength !==0 && cardLength <=12 && cardLength % 4 == 0){
+			$(this).val($(this).val()+' ');
+			}
+			});
+	</script>
+
+</body>
+
+</html>

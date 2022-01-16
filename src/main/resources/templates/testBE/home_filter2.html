@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Insert title here</title>
+    </head>
+    <body>
+    
+        <form action="/api/mvc/veicolo/filtra">
+            <select name="tipologia" id="tipologia"  onclick="prova()">
+                <option value="null" disabled selected>Scegli Veicolo</option>
+                <option value="all">Qualsiasi</option>
+                <option th:value="${tipologia}" th:text="${tipologia}" th:each="tipologia:${tipologie}"/>
+            </select>
+            <select name="alimentazione" id="alimentazione" onclick="prova()">
+                <option value="null" disabled selected>Scegli Alimentazione</option>
+                <option value="all">Qualsiasi</option>
+                <option th:value="${alimentazione}" th:text="${alimentazione}" th:each="alimentazione : ${alimentazioni}"/>
+            </select>
+            <button type="submit" id="pulsante">Cerca</button>
+        </form>
+        
+        <script type="text/javascript">
+            var pulsante = document.getElementById("pulsante");
+			prova();
+        	function prova(){
+                var tipologia = document.getElementById("tipologia").value;
+                console.log(tipologia);
+                var alimentazione = document.getElementById("alimentazione").value;
+                console.log(alimentazione);
+	            if(tipologia == "null" || alimentazione == "null" ){
+	                pulsante.disabled=true;
+	            }
+	            else pulsante.disabled=false;
+        	}
+        </script>
+    </body>
+</html>

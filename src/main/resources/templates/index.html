@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="/style_index.css">
+<link href='https://fonts.googleapis.com/css?family=Merienda One'
+	rel='stylesheet'>
+
+<title>E-Anduma - Home</title>
+</head>
+<body>
+
+	<!--HEADER-->
+	<div class="container my-3">
+		<script th:replace="/header"></script>
+
+		<!-- <div class="separatore"></div>-->
+	</div>
+
+
+
+	<!--BANNER IMAGE-->
+	<div class="container-fluid">
+		<div class="row mt-2 mb-4">
+
+			<!--  <div class="col-lg-6"> 
+                <img class="img-fluid" src="imgs/logo_giallo.png" alt="Illustrazione veicoli e-anduma per torino">
+            </div>-->
+
+			<div class="col-lg-12">
+				<!--provare a togliere col x farla + grande da mobile-->
+				<img class="img-fluid" src="imgs/bannerNew2Bassa.jpg"
+					alt="Illustrazione veicoli e-anduma per torino">
+			</div>
+
+		</div>
+	</div>
+
+
+	<div class="container my-4">
+
+		<div class="separator"></div>
+
+		<!--FORM SELEZIONE VEICOLO-->
+		<!--Filtro per selezionare tipo di veicolo-->
+
+
+		<form action="/elenco/0/">
+			<div class="row">
+				<div class="col-md-6" id="primasezione">
+					<div class="input-group mb-3">
+						<label class="input-group-text" for="inputGroupSelect01"
+							style="color: white; background-color: #009EE3;">Scegli
+							il Veicolo</label> <select name="tipologia" class="form-select"
+							id="tipologia" onchange="filtra()">
+							<option value="null" disabled selected>Seleziona</option>
+							<option value="all">Qualsiasi</option>
+							<option th:value="${tipologia}" th:text="${tipologia}"
+								th:each="tipologia : ${tipologie}" />
+						</select>
+					</div>
+				</div>
+
+				<div class="col-md-6" id="secondasezione">
+					<div class="input-group mb-3">
+						<label class="input-group-text" for="inputGroupSelect01"
+							style="color: white; background-color: #009EE3;">Scegli
+							l'Alimentazione</label> 
+							<select name="alimentazione" class="form-select"
+							id="alimentazione">
+						</select>
+						<button class="btn btn-outline-secondary" type="submit"
+							id="pulsante" style="color: white; background-color: #009EE3;">Cerca</button>
+					</div>
+				</div>
+			</div>
+		</form>
+
+
+
+		<div class="separatore"></div>
+
+		<!--"CHI SIAMO"-->
+		<div class="row">
+
+			<div class="col-lg-12 sectionText d-flex flex-column text-center">
+				<h3>CHI SIAMO</h3>
+				<br>
+
+				<p>E-anduma, il car sharing del comune di Torino, è un vero e
+					proprio servizio di trasporto pubblico che ti permette di spostarti
+					in modo semplice e veloce per andare dove vuoi tu! Non solo potrai
+					scegliere tra tantissimi modelli disponibili, ma con le nostre
+					proposte di trasporto contribuisci a migliorare l’ambiente e a
+					promuovere la mobilità sostenibile. Cosa aspetti, scegli come
+					muoverti e al resto ci pensiamo noi!</p>
+
+			</div>
+
+		</div>
+
+		<div class="separatore"></div>
+
+		<!--CAROSELLO-->
+		<div class="container text-center">
+			<h3>I NOSTRI SERVIZI</h3>
+			<br>
+			<!--CAROSELLO DESKTOP-->
+			<div id="carouselExampleControls"
+				class="carousel slide border d-none d-lg-block"
+				data-bs-ride="carousel">
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="/imgs/1_carosello.jpg" class="d-block w-100" alt="...">
+					</div>
+
+					<div class="carousel-item">
+						<img src="/imgs/2_carosello.jpg" class="d-block w-100" alt="...">
+					</div>
+
+					<div class="carousel-item">
+						<img src="/imgs/3_carosello.jpg" class="d-block w-100" alt="...">
+					</div>
+
+					<div class="carousel-item">
+						<img src="/imgs/4_carosello.jpg" class="d-block w-100" alt="...">
+					</div>
+
+					<div class="carousel-item">
+						<img src="/imgs/5_carosello.jpg" class="d-block w-100" alt="...">
+					</div>
+
+					<div class="carousel-item">
+						<img src="/imgs/6_carosello.jpg" class="d-block w-100" alt="...">
+					</div>
+
+					<div class="carousel-item">
+						<img src="/imgs/7_carosello.jpg" class="d-block w-100" alt="...">
+					</div>
+
+					<div class="carousel-item">
+						<img src="/imgs/8_carosello.jpg" class="d-block w-100" alt="...">
+					</div>
+
+				</div>
+
+				<button class="carousel-control-prev" type="button"
+					data-bs-target="#carouselExampleControls" data-bs-slide="prev"
+					style="color: blue;">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button"
+					data-bs-target="#carouselExampleControls" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+
+			<!--CAROSELLO MOBILE -->
+
+			<div id="carouselExampleControls2"
+				class="carousel slide d-block d-lg-none" data-bs-ride="carousel">
+				<div class="carousel-inner">
+					<a href="#!" class="carousel-item active " data-bs-toggle="modal"
+						data-bs-target="#staticBackdrop1"> <img
+						src="/imgs/Carosello_mobile-1.jpg" class="d-block w-100" alt="...">
+
+					</a> <a href="#!" class="carousel-item" data-bs-toggle="modal"
+						data-bs-target="#staticBackdrop2"> <img
+						src="/imgs/Carosello_mobile-2.jpg" class="d-block w-100" alt="...">
+
+					</a> <a href="#!" class="carousel-item" data-bs-toggle="modal"
+						data-bs-target="#staticBackdrop3"> <img
+						src="/imgs/Carosello_mobile-5.jpg" class="d-block w-100" alt="...">
+
+					</a> <a href="#!" class="carousel-item" data-bs-toggle="modal"
+						data-bs-target="#staticBackdrop4"> <img
+						src="/imgs/Carosello_mobile-6.jpg" class="d-block w-100" alt="...">
+
+					</a> <a href="#!" class="carousel-item" data-bs-toggle="modal"
+						data-bs-target="#staticBackdrop5"> <img
+						src="/imgs/Carosello_mobile-3.jpg" class="d-block w-100" alt="...">
+
+					</a> <a href="#!" class="carousel-item" data-bs-toggle="modal"
+						data-bs-target="#staticBackdrop6"> <img
+						src="/imgs/Carosello_mobile-4.jpg" class="d-block w-100" alt="...">
+
+					</a> <a href="#!" class="carousel-item" data-bs-toggle="modal"
+						data-bs-target="#staticBackdrop7"> <img
+						src="/imgs/Carosello_mobile-7.jpg" class="d-block w-100" alt="...">
+
+					</a> <a href="#!" class="carousel-item" data-bs-toggle="modal"
+						data-bs-target="#staticBackdrop8"> <img
+						src="/imgs/Carosello_mobile-8.jpg" class="d-block w-100" alt="...">
+
+					</a>
+
+
+
+				</div>
+				<button class="carousel-control-prev" type="button"
+					data-bs-target="#carouselExampleControls2" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button"
+					data-bs-target="#carouselExampleControls2" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+		</div>
+		<!--CHIUSURA CAROSELLO-->
+
+
+		<div class="separatore"></div>
+
+		<!--MODALE 1 FIAT 500 ELETTRICA-->
+		<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">FIAT 550 |
+							Elettrica</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Grazie alla sua tecnologia, Nuova 500 è più sicura che mai:
+							il suo Fiat Co-Driver con Traffic Jam Assist ti aiuterà durante i
+							tuoi viaggi. Date le sue dimensioni compatte, la 500 elettrica è
+							l’ideale per girare in città.</p>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!--MODALE 2 AUDI E-TRON ELE-->
+		<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">AUDI e-tron
+							| Elettrica</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Il primo modello Audi completamente elettrico è pronto a
+							conquistare la strada. Grazie a due motori elettrici capaci di
+							erogare fino a 408 CV, garantisce un’autonomia di oltre 400 km.
+							Un suv perfetto per viaggiare ovunque.</p>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!--MODALE 3-->
+		<div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">FIAT 550 |
+							Benzina</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>La 500 resta il punto di riferimento tra le citycar. Grazie
+							al suo stile vintage, la berlina della Casa torinese, presentata
+							nel 2007, si è data una rinfrescata nel 2012 e ha fatto subito
+							breccia nel cuore degli automobilisti.</p>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!--MODALE 4-->
+		<div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">FIAT 500L |
+							Diesel</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Spaziosa e funzionale, la Fiat 500L garantisce una ottima
+							abitabilità interna grazie alla sua lunghezza di24 m. Le
+							proporzioni della vettura sono equilibrate grazie anche ad una
+							larghezza pari a 178 cme ad una altezza di un 1.66 m.</p>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!--MODALE 5-->
+		<div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">E-MOON |
+							Elettrica</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>La bicicletta elettrica E-Moon ha un telaio in alluminio.
+							Questa bicicletta è dotata di un motore anteriore ANANDA M129F da
+							250w che offre una lunga durata ed alte prestazioni e che può
+							raggiungere una velocità massima di 25km/h.</p>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!--MODALE 6-->
+		<div class="modal fade" id="staticBackdrop6" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">OLANDA‘26 |
+							Pedalata muscolare</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>La bicicletta Olanda ‘26 ha un telaio in alluminio e un
+							design retrò con forme semplici ma funzionali. Questa bicicletta
+							classica accoglie i gusti di tutti perché è una bellissima
+							bicicletta da passeggio, ideale per le passeggiate.</p>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!--MODALE 7-->
+		<div class="modal fade" id="staticBackdrop7" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">IBSUN L10 |
+							Elettrico</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Il Monopattino elettrico Ibsun L10 ha un potente motore da
+							350W che può raggiungere fino ai 25km/h. È dotato di un sistema
+							frenante meccanico ed elettrico Anti-Lock, che garantisce la
+							sicurezza di frenata.</p>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!--MODALE 8-->
+		<div class="modal fade" id="staticBackdrop8" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">VESPA |
+							Elettrica</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>La nuova Vespa elettrica della Piaggio, Ha una velocità
+							massima di 70km/h e rappresenta l’equilibrio perfetto tra
+							innovazione ecologica e prestazioni di guida brillanti,
+							ottimizzate grazie al perfezionamento di tutti i suoi componenti.</p>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!--</div> A CHI APPARTIENI?
+                </div> -A CHI APPARTIENI?-->
+
+
+
+		<!--Cards "COME FUNZIONA"-->
+		<div class="prova" id="blu">
+
+			<div class="container text-center" id="card">
+
+				<h3>COME FUNZIONA</h3>
+				<br>
+				<div class="row justify-content-center" id="">
+
+					<div class="col-md-4 col-sm-7 my-3">
+						<div class="card h-100">
+							<img class="card-img-top" src="/imgs/PROVA1_PH.png" alt="Scegli">
+							<div class="card-body">
+								<h5 class="card-title">Scegli</h5>
+								<p class="card-text">Tra le tante alternative disponibili,
+									scegli il modello che meglio soddisfa le tue esigenze!</p>
+
+
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 col-sm-7 my-3">
+						<div class="card h-100">
+							<img class="card-img-top" src="/imgs/PROVA3_PH.png" alt="Prenota">
+							<div class="card-body">
+								<h5 class="card-title">Prenota</h5>
+								<p class="card-text">Una volta scelto il mezzo, trova quello
+									più vicino a te e prenotalo.</p>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 col-sm-7 my-3">
+						<div class="card h-100">
+							<img class="card-img-top" src="/imgs/PROVA2_PH.png" alt="Vai">
+							<div class="card-body">
+								<h5 class="card-title">e-VAI!</h5>
+								<p class="card-text">Il tuo noleggio è iniziato, puoi
+									guidare quanto e dove vuoi!</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="separatore"></div>
+
+	</div>
+
+
+	<!--Footer-->
+
+	<footer class="text-lg-white py-2 " style="background-color: #009EE3">
+		<div class="container" id="footer">
+
+			<div class="row">
+				<div
+					class="sectionText text-center d-flex col-sm-6 justify-content-sm-start justify-content-center  align-items-center">
+
+					<p class="text-white mb-0">e-anduma s.r.l. | P.I
+						ITA12345678900</p>
+
+				</div>
+
+				<div
+					class="d-flex col-sm-6 justify-content-sm-end justify-content-center align-items-center">
+					<a class="btn btn-floating m-1 text-white"
+						style="background-color: #009EE3" href="#!" role="button"> <i
+						class="fab fa-instagram"></i>
+					</a> <a class="btn btn-floating m-1 text-white"
+						style="background-color: #009EE3" href="#!" role="button"> <i
+						class="fab fa-facebook-f"></i>
+					</a> <a class="btn btn-floating m-1 text-white"
+						style="background-color: #009EE3" href="#!" role="button"> <i
+						class="fab fa-youtube"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+	<script type="text/javascript"> 
+	setTimeout(function()
+			
+		    {console.log("ciao");}, 3000);
+	
+        	document.getElementById("primasezione").classList.remove('col-md-6');
+		document.getElementById("secondasezione").style.display="none";
+        function filtra() {
+        	document.getElementById("primasezione").classList.add('col-md-6');
+        	document.getElementById("secondasezione").style.display="block";
+            var selectTipologia = document.getElementById("tipologia");
+            var selectAlimentazione = document.getElementById("alimentazione");
+        	fetch("/api/filtro/" + tipologia.value).then(j=>j.json()).then(alimentazioni => {
+        		pulisci(selectAlimentazione);
+	        	selectAlimentazione.options.add(new Option("Qualsiasi", "all"));
+	        	alimentazioni.forEach((alimentazione) =>{
+	        		selectAlimentazione.options.add(new Option(alimentazione, alimentazione));
+	        	})
+        	});
+        }
+        
+        function pulisci(alimentazione){
+        	let i = alimentazione.options.length;
+        	for(i; i>=0; i--){
+        		alimentazione.remove(i);
+        	}
+        }
+    </script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

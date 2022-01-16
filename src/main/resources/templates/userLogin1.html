@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="Description" content="Enter your description here"/>
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+        <link rel="stylesheet" href="style_storico.css">
+
+        <link href='https://fonts.googleapis.com/css?family=Merienda One' rel='stylesheet'>
+
+        <title>Storico</title>
+    </head>
+
+    <body>
+
+        <div class="container my-3">
+
+            <script th:replace="/header"></script>
+
+ 			 <script th:replace="/userTabs"></script>
+            <div class="container text-center">
+            
+          
+
+                <br>
+                <h3>Le tue prenotazioni Passate</h3>
+                    
+  
+                <div class="separatore"></div>
+
+                <!--SEZIONE TABELLA DISPONIBILITA'-->
+
+                <div class="row my-4 text-center table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr style= "color: white; background-color: #009EE3;">
+                                <th scope="col">Numero di prenotazione</th>
+                                <th scope="col">Veicolo</th>
+                                <th scope="col">Data Inizio </th>
+                                <th scope="col">Ora Inizio</th>
+                                <th scope="col">Data Fine </th>
+                                <th scope="col">Ora Fine</th>
+                                <th scope="col">Durata</th>
+							<th scope="col">Prezzo</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<!--questo poi verrà cancellato-->
+						<tr th:each="prenotazione:${prenotazioni}">
+							<td th:text="${prenotazione.id_prenotazione}" />
+							<td
+								th:text="${veicoli.trovaUno(prenotazione.id_veicolo).tipologia}" />
+							<td th:text="${prenotazione.data_inizio}" />
+							<td th:text="${prenotazione.ora_inizio}" />
+							<td th:text="${prenotazione.data_fine}" />
+					
+							<td th:text="${prenotazione.ora_fine}" />
+							<td th:text="${prenotazione.durata} + ' min'" />
+							<td th:text="${prenotazione.prezzo} + ' euros'" /> 
+
+							<!-- <td th:text="${prenotazione.ora} + ':' + ${prenotazione.minuti}"> -->
+							
+<!-- 							<td><a th:if="${prenotazione.status}"
+								th:href="@{/end/prenotazione/{id_prenotazione}(id_prenotazione=${prenotazione.id_prenotazione})}">
+									<i class="far fa-window-close"></i>
+							</a>
+							</td> -->
+							</tr>
+
+                             
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="separatore"></div>
+
+                <!--SEZIONE BANNER-->
+
+                    <div class="container">
+                        <div class="row ">
+        
+                            <div class="col-lg-12">
+                                <img class="img-fluid" src="imgs/prenotaioni.png" alt="Le tue prenotazioni">
+                            </div>
+        
+                        </div>
+                    </div>
+
+            </div>
+        </div>    
+
+                <!--Footer-->
+                <footer class="text-lg-white py-2" style="background-color: #009EE3">
+                    <div class="container" id="footer">
+        
+                        <div class="row">
+                            <div
+                                class="sectionText text-center d-flex col-sm-6 justify-content-sm-start justify-content-center  align-items-center">
+        
+                                <p class="text-white mb-0">e-anduma s.r.l. | P.I ITA12345678900
+                                </p>
+        
+                            </div>
+        
+                            <div
+                                class="d-flex col-sm-6 justify-content-sm-end justify-content-center align-items-center">
+                                <a
+                                    class="btn btn-floating m-1 text-white"
+                                    style="background-color: #009EE3"
+                                    href="#!"
+                                    role="button">
+                                    <i class="fab fa-instagram"></i >
+                                </a>
+        
+                                <a
+                                    class="btn btn-floating m-1 text-white"
+                                    style="background-color: #009EE3"
+                                    href="#!"
+                                    role="button">
+                                    <i class="fab fa-facebook-f"></i >
+                                </a>
+                                <a
+                                    class="btn btn-floating m-1 text-white"
+                                    style="background-color: #009EE3"
+                                    href="#!"
+                                    role="button">
+                                    <i class="fab fa-youtube"></i >
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+            
+        
+            </footer>
+
+                <script
+                    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                    crossorigin="anonymous"></script>
+		</body>
+
+        </html>

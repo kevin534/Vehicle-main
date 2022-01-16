@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="Description" content="Enter your description here" />
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+		crossorigin="anonymous">
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Merienda One'
+		rel='stylesheet'>
+	<link rel="stylesheet" href="style_listaVeicoli.css">
+	<!--LEAFLET -->
+	<link rel="stylesheet"
+		href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+		integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+		crossorigin="" />
+	<title>Veicoli</title>
+	</head>
+	<body>
+		<div class="container my-3">
+			<script th:replace="/header"></script>
+			<div class="input-group mb-3">
+				<input type="search" id="indirizzo" class="form-control"
+					placeholder="Indirizzo">
+				<button class="btn btn-outline-secondary" type="submit" id="pulsante"
+					style="color: white; background-color: #009EE3;" onclick="cerca()">Cerca</button>
+			</div>
+			<!--SEZIONE MAPPA-->
+			<div class="container">
+                    <div class="row my-3">
+                        <div id="mapid" style="height: 300px"></div>
+                    </div>
+                </div>
+			<!--FORM RICERCA -->
+			<form action="/elenco/0/">
+				<div class="row">
+					<div class="col-md-6" id="primasezione">
+						<div class="input-group mb-3">
+							<label class="input-group-text" for="inputGroupSelect01"
+								style="color: white; background-color: #009EE3;">Scegli il Veicolo</label> 
+								<select name="tipologia" class="form-select"
+								id="tipologia" onchange="filtra()">
+								<option value="null" disabled selected>Seleziona</option>
+								<option value="all">Qualsiasi</option>
+								<option th:value="${tipologia}" th:text="${tipologia}"
+									th:each="tipologia : ${tipologie}" />
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6" id="secondasezione">
+						<div class="input-group mb-3">
+							<label class="input-group-text" for="inputGroupSelect01"
+								style="color: white; background-color: #009EE3;">Scegli l'Alimentazione</label> 
+								<select name="alimentazione" class="form-select"
+								id="alimentazione">
+							</select>
+							<button class="btn btn-outline-secondary" type="submit"
+								id="pulsante" style="color: white; background-color: #009EE3;">Cerca</button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<br> <br>
+			<div class="row my-3" th:each="veicolo:${veicoli}">
+				<div class="col-lg-4 sectionImage">
+					<img class="img-fluid" th:src="${veicolo.immagine}+ '/main.jpeg'"
+						alt="Foto veicolo">
+				</div>
+				<div class="col-lg-8 sectionText">
+					<input type="hidden" name="id">
+					<h2 th:text="${veicolo.modello}"></h2>
+					<h3 th:text="${veicolo.alimentazione}"></h3>
+					<p th:text="${veicolo.descrizione}"></p>
+					<a th:href="@{'/dettaglio/' + ${veicolo.id_veicolo}}" class="btn"
+						style="color: white; background-color: #009EE3;">Scopri</a>
+				</div>
+				<div class="separatore"></div>
+			</div>
+<!-- 			<a th:href="@{${precedente}}"> precedente</a> -->
+<!-- 			<a th:href="@{${successiva}}"> successiva</a> -->
+	<!-- 		<!--PAGINATION-->
+	<!-- 		<div> -->
+	<!-- 			<nav aria-label="Page navigation example"> -->
+	<!-- 				<ul class="pagination justify-content-md-end justify-content-center"> -->
+	<!-- 					<li class="page-item disabled" th:if="${pagina} == 0"><a -->
+	<!-- 						class="page-link" aria-disabled="true">Indietro</a></li> -->
+	<!-- 					<li class="page-item" th:if="${pagina} > 0"><a -->
+	<!-- 						class="page-link" -->
+	<!-- 						th:href="@{/elenco/{numPagina}/?tipologia={tipologia}&alimentazione={alimentazione}(numPagina = ${pagina} - 1)()()}">Indietro</a> -->
+	<!-- 					</li> -->
+	<!-- 					<li class="page-item" -->
+	<!-- 						th:each="numeroPagina: ${#numbers.sequence(1, numPagine)}"><a -->
+	<!-- 						id="prova" class="page-link" -->
+	<!-- 						th:href="@{/elenco/{numPagina}(numPagina = ${numeroPagina} - 1)}" -->
+	<!-- 						th:text="${numeroPagina}" th:if="${pagina} == ${numeroPagina} - 1" -->
+	<!-- 						style="font-weight: bold"></a> <a class="page-link" -->
+	<!-- 						th:href="@{/elenco/{numPagina}(numPagina = ${numeroPagina} - 1)}" -->
+	<!-- 						th:text="${numeroPagina}" th:if="${pagina} != ${numeroPagina} - 1"></a> -->
+	<!-- 					</li> -->
+	<!-- 					<li class="page-item disabled" -->
+	<!-- 						th:if="${pagina} == ${numPagine} - 1"><a class="page-link" -->
+	<!-- 						aria-disabled="true">Avanti</a></li> -->
+	<!-- 					<li class="page-item" th:if="${pagina} < ${numPagine} -1"><a -->
+	<!-- 						class="page-link" -->
+	<!-- 						th:href="@{/elenco/{numPagina}(numPagina = ${pagina} + 1)}">Avanti</a> -->
+	<!-- 					</li> -->
+	<!-- 				</ul> -->
+	<!-- 			</nav> -->
+	<!-- 		</div> -->
+	<!-- 	</div> -->
+	
+		<!--Footer-->
+		<footer class="text-lg-white py-2" style="background-color: #009EE3">
+			<div class="container" id="footer">
+	
+				<div class="row">
+					<div
+						class="sectionText text-center d-flex col-sm-6 justify-content-sm-start justify-content-center  align-items-center">
+	
+						<p class="text-white mb-0">e-anduma s.r.l. | P.I ITA12345678900</p>
+	
+					</div>
+	
+					<div
+						class="d-flex col-sm-6 justify-content-sm-end justify-content-center align-items-center">
+						<a class="btn btn-floating m-1 text-white"
+							style="background-color: #009EE3" href="#!" role="button"> <i
+							class="fab fa-instagram"></i>
+						</a> <a class="btn btn-floating m-1 text-white"
+							style="background-color: #009EE3" href="#!" role="button"> <i
+							class="fab fa-facebook-f"></i>
+						</a> <a class="btn btn-floating m-1 text-white"
+							style="background-color: #009EE3" href="#!" role="button"> <i
+							class="fab fa-youtube"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous">
+	    </script>
+	    
+		<!--     Leaflet -->
+		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+			integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+			crossorigin="">
+	    </script>
+	
+		<script type="text/javascript">
+	//	MAPPA
+	//----------------------------------------------------------------------------------------------------------------------------
+	//		ATTENZIONE
+	//		chrome://flags/
+	//			Allow invalid certificates for resources loaded from localhost.
+	//			Insecure origins treated as secure
+	//	necessari per la geolocalizzazione
+	//	disattivare dopo la presentazione!!
+	
+	    var icon = new L.Icon({
+	  	  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+	  	  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+	  	  iconSize: [25, 41],
+	  	  iconAnchor: [12, 41],
+	  	  popupAnchor: [1, -34],
+	  	  shadowSize: [41, 41]
+	  	});
+	    var blueIcon = new L.Icon({
+	  	  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+	  	  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+	  	  iconSize: [25, 41],
+	  	  iconAnchor: [12, 41],
+	  	  popupAnchor: [1, -34],
+	  	  shadowSize: [41, 41]
+	  	});
+	    
+		if(navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(showPosition);
+		}
+		var mymap;
+	    function showPosition(position){
+	    	console.log("posizione: " + position);
+	        var latitudine = position.coords.latitude;
+	        var longitudine = position.coords.longitude;
+	        mymap = L.map('mapid').setView([45.06653550, 7.65515380], 13);
+	        L.tileLayer(
+	                'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessTo' +
+	                        'ken}',
+	                {
+	                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMa' +
+	                            'p</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	                    maxZoom: 18,
+	                    id: 'mapbox/streets-v11',
+	                    tileSize: 512,
+	                    zoomOffset: -1,
+	                    accessToken: 'pk.eyJ1IjoiY2lnbGllcnMiLCJhIjoiY2tybms3Y3prMG1rODJucnE4NWVxcWloNiJ9.eRFXIAo1z2bXBGegMd-7aA'
+	                }
+	            )
+	            .addTo(mymap);
+	        	L.marker([latitudine, longitudine], {icon: icon}).addTo(mymap);
+	        	mymap.flyTo([latitudine, longitudine]);
+	    }
+	//----------------------------------------------------------------------------------------------------------------------------
+				
+				function cerca()
+				{
+				 var inp = document.getElementById("indirizzo");
+				 var xmlhttp = new XMLHttpRequest();
+				 var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + inp.value;
+				 xmlhttp.onreadystatechange = function()
+				 {
+				   if (this.readyState == 4 && this.status == 200)
+				   {
+				    var risposta = JSON.parse(this.responseText);
+				    console.log(risposta);
+				    console.log(risposta[0].lat);
+				    console.log(risposta[0].lon);
+				    mymap.flyTo([risposta[0].lat, risposta[0].lon]);
+				   }
+				 };
+				 xmlhttp.open("GET", url, true);
+				 xmlhttp.send();
+				}
+				
+			</script>
+		<script type="text/javascript"> 
+	        	document.getElementById("primasezione").classList.remove('col-md-6');
+			document.getElementById("secondasezione").style.display="none";
+	        function filtra() {
+	        	document.getElementById("primasezione").classList.add('col-md-6');
+	        	document.getElementById("secondasezione").style.display="block";
+	            var selectTipologia = document.getElementById("tipologia");
+	            var selectAlimentazione = document.getElementById("alimentazione");
+	        	fetch("/api/filtro/" + tipologia.value).then(j=>j.json()).then(alimentazioni => {
+	        		pulisci(selectAlimentazione);
+		        	selectAlimentazione.options.add(new Option("Qualsiasi", "all"));
+		        	alimentazioni.forEach((alimentazione) =>{
+		        		selectAlimentazione.options.add(new Option(alimentazione, alimentazione));
+		        	})
+	        	});
+	        }
+	        
+	        function pulisci(alimentazione){
+	        	let i = alimentazione.options.length;
+	        	for(i; i>=0; i--){
+	        		alimentazione.remove(i);
+	        	}
+	        }
+	    </script>
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+	
+	    		var veicoli = /*[[${tutti}]]*/ 'default';
+			/*]]>*/
+	    		console.log(veicoli);
+	    		veicoli.forEach(veicolo => {
+	    			setTimeout(function()
+	    				    {
+	    			var inp = veicolo.posizione;
+	    			console.log(inp);
+	    			var xmlhttp = new XMLHttpRequest();
+	   			 	var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + inp;
+	   			 	xmlhttp.onreadystatechange = function(){
+	   			   		if (this.readyState == 4 && this.status == 200){
+	   			    		var risposta = JSON.parse(this.responseText);
+	   			    		console.log(risposta);
+	   				 		var puntatore = L.marker([risposta[0].lat, risposta[0].lon], {icon: blueIcon}).addTo(mymap);
+	   				 		puntatore.bindPopup("<div style=\"text-align: center;\"><h5><strong>" + veicolo.modello + "</strong></h5><h6>" + veicolo.alimentazione + "</h6>" + 
+	   				 			"<a href=\"/dettaglio/" + veicolo.id_veicolo + "\" class=\"btn\" style=\"color: white; background-color: #009EE3;\">Scopri</a></div>");
+	   				 		
+	   					}
+				 	};
+				 	xmlhttp.open("GET", url, true);
+				 	xmlhttp.send();
+	    				    }, 1000);
+				});
+	
+	</script>	
+	</body>
+</html>

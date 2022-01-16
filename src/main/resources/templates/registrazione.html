@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<link href='https://fonts.googleapis.com/css?family=Merienda One'
+	rel='stylesheet'>
+<link rel="stylesheet" href="/style_registrazione.css">
+
+
+<title>Registrazione</title>
+</head>
+<body>
+
+	<div class="container my-3">
+		<script th:replace="/header"></script>
+
+		<div class="separatore"></div>
+		<div class="container my-4">
+
+			<div class="row d-flex align-items-center" id="intro">
+
+
+
+				<div class="col-lg-8 sectionText ">
+
+					<div>
+						<h1 th:if="${utente.tipo} == 'A' or ${utente.tipo} == 'B'">Modifica
+							i tuoi dati:</h1>
+						<h1 th:if="${utente.tipo} != 'A' and ${utente.tipo} != 'B'">Inserisci
+							i tuoi dati:</h1>
+						<br>
+					</div>
+					<form th:action="@{/aggiungi/utente}" method="post"
+						enctype="multipart/form-data" class="row g-3 "
+						th:object="${modelloUtente}" id="formUtente" name="mioForm">
+
+						<div class="col-md-4">
+							<label>Nome</label> <input type="text" name="nome" id="nome"
+								class="form-control" th:value="${utente.nome}" oninput="controlla()">
+						</div>
+						<div class="col-md-4">
+
+							<label>Cognome</label> <input type="text" name="cognome"
+								id="cognome" class="form-control" th:value="${utente.cognome}" oninput="controlla()">
+						</div>
+
+						<div class="col-md-4">
+							<label>Data di nascita</label> <input type="date"
+								name="dataNascita" id="dataNascita" class="form-control"
+								th:value="${utente.data_nascita}" oninput="controlla()">
+						</div>
+
+						<div class="col-md-6">
+							<label>Email</label> <input type="email" name="email" id="emailUtente"
+								class="form-control" th:value="${utente.email}" oninput="controlla()">
+						</div>
+
+						<div class="col-md-6">
+							<label>Password</label> <input type="text"
+								th:value="${utente.password}" name="password"
+								id="passwordUtente" class="form-control" oninput="controlla()">
+						</div>
+
+						<div class="col-md-6">
+							<label>Conferma Password</label> <input type="text"
+								name="confermaPassword" id="confermaPassword"
+								class="form-control" th:value="${utente.password}"
+								oninput="controlla()">
+						</div>
+
+						<button id="conferma" type="submit" class="btn btn-lg"
+							style="color: white; background-color: #009EE3;">Invia</button>
+
+					</form>
+					<div class="separatore"></div>
+				</div>
+
+				<br> <br>
+
+				<div class="col-lg-4  order-lg-1 sectionImage my-4">
+
+					<img class="img-fluid" src="/imgs/iscrizione.png" alt="errore Login">
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div class="separatore"></div>
+
+	<footer class="text-lg-white py-2" style="background-color: #009EE3">
+		<div class="container" id="footer">
+
+			<div class="row">
+				<div
+					class="sectionText text-center d-flex col-sm-6 justify-content-sm-start justify-content-center  align-items-center">
+
+					<p class="text-white mb-0">e-anduma s.r.l. | P.I ITA12345678900</p>
+
+				</div>
+
+				<div
+					class="d-flex col-sm-6 justify-content-sm-end justify-content-center align-items-center">
+					<a class="btn btn-floating m-1 text-white"
+						style="background-color: #009EE3" href="#!" role="button"> <i
+						class="fab fa-instagram"></i>
+					</a> <a class="btn btn-floating m-1 text-white"
+						style="background-color: #009EE3" href="#!" role="button"> <i
+						class="fab fa-facebook-f"></i>
+					</a> <a class="btn btn-floating m-1 text-white"
+						style="background-color: #009EE3" href="#!" role="button"> <i
+						class="fab fa-youtube"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script type="text/javascript">
+		console.log(document.getElementById("passwordUtente").value);
+		console.log(document.getElementById("confermaPassword").value);
+		console.log(document.getElementById("dataNascita").value);
+		console.log(document.getElementById("nome").value);
+		console.log(document.getElementById("cognome").value);
+		console.log(document.getElementById("emailUtente").value);
+
+		window.onload = controlla;
+		function controlla() {
+			if (document.getElementById("passwordUtente").value != document.getElementById("confermaPassword").value
+					|| document.getElementById("nome").value == ""
+					|| document.getElementById("cognome").value == ""
+					|| document.getElementById("dataNascita").value == ""
+					|| document.getElementById("emailUtente").value == ""
+					|| document.getElementById("passwordUtente").value == ""
+					|| document.getElementById("confermaPassword").value == "") {
+				document.getElementById("conferma").disabled = true;
+			} else {
+				document.getElementById("conferma").disabled = false;
+			}
+
+		}
+	</script>
+</body>
+</html>

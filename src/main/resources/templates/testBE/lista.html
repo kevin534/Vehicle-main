@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>Veicoli</title>
+    </head>
+    <body>
+        <div th:each="veicolo:${veicoli}">
+            <h3>Lista dei Veicoli Filtrati</h3>
+            <p>nome: <span th:text="${veicolo.modello}"></span></p>
+            <p>foto:<span th:text="${veicolo.immagine}"></span></p>
+            <p>Alimentazione:<span th:text="${veicolo.alimentazione}"></span></p>
+            <p>Tipologia:<span th:text="${veicolo.tipologia}"></span></p>
+            <p>percorso file: <span th:text="${veicolo.photosImagePath}"></span> </p>
+            <img th:src="@{${veicolo.photosImagePath}}" />
+        </div>
+    </body>
+</html>

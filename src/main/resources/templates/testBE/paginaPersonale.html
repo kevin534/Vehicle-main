@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+            <h3>Pagina Personale: </h3>
+            <p>nome: <span th:text="${utente.nome}"></span></p>
+            <p>cognome:<span th:text="${utente.cognome}"></span></p>
+            <p>Tipo:<span th:text="${utente.tipo}"></span></p>
+            <p>Email:<span th:text="${utente.email}"></span></p>
+           
+</body>
+</html>

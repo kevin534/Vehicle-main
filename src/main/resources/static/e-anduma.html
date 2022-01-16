@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here"/>
+
+   
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+        <title>E-ANDUMA</title>
+    </head>
+    <body>
+        <div class="container my-3">
+       		<script th:replace="/header"></script>
+
+            <div class="separatore"></div>
+
+            <!--Sezione immagine principale-->
+            <div class="container">
+                <div class="row my-4">
+
+                    <div class="col-lg-12">
+                        <img class="img-fluid" src="imgs/FotoPrincipale.png" alt="Foto di prova">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="separatore"></div>
+
+            <!--Filtro per selezionare tipo di veicolo-->
+            <div class="input-group">
+
+	                <form action="/filtra">
+	            <select name="tipologia" id="tipologia"  onclick="prova()">
+	                <option value="null" disabled selected>Scegli Veicolo</option>
+	                <option value="all">Qualsiasi</option>
+	                <option th:value="${tipologia}" th:text="${tipologia}" th:each="tipologia:${tipologie}"/>
+	            </select>
+	            <select name="alimentazione" id="alimentazione" onclick="prova()">
+	                <option value="null" disabled selected>Scegli Alimentazione</option>
+	                <option value="all">Qualsiasi</option>
+	                <option th:value="${alimentazione}" th:text="${alimentazione}" th:each="alimentazione : ${alimentazioni}"/>
+	            </select>
+	            <button type="submit" id="pulsante">Cerca</button>
+	        </form>
+
+            </div>
+
+            <div class="separatore"></div>
+
+            <!--Sezione "CHI SIAMO"-->
+            <div class="row d-flex text-center my-4">
+
+                <div class="col-lg-12 sectionText d-flex flex-column text-center">
+                    <h3>CHI SIAMO</h3>
+
+                </div>
+
+                <div class="col-lg-12 sectionText d-flex flex-column text-center row my-3"></div>
+                    <p>
+                        La e-anduma fornisce un servizio di vehicle sharing nelle aree urbane di Torino, le nostre proposte di veicoli puntano all’ eco-friendly così da poter ridurre ampiamente l’ impatto ambientale.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="separatore"></div>
+
+            <!--Carosello con i veicoli-->
+            <div class="container text-center my-4">
+
+                <div class="col-lg-12 sectionText d-flex flex-column text-center">
+                    <h3>I NOSTRI SERVIZI</h3>
+                    <br>
+                    <br>
+                </div>
+               
+
+                <section id="carouselSlider my-3">
+                    <div
+                        id="carouselExampleControls"
+                        class="carousel slide"
+                        data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+
+                                <!--img a destra-->
+                                <img
+                                    src="https://source.unsplash.com/1200x600/?kenya"
+                                    class="d-block w-100"
+                                    alt="...">
+                                    <br>
+                                 <button>
+                                     vai
+                                 </button>
+
+                            </div>
+                            <div class="carousel-item active">
+                                <img
+                                    src="https://source.unsplash.com/1200x600/?italy"
+                                    class="d-block w-100"
+                                    alt="...">
+                            </div>
+                            <div class="carousel-item active">
+                                <img
+                                    src="https://source.unsplash.com/1200x600/?greece"
+                                    class="d-block w-100"
+                                    alt="...">
+                            </div>
+                        </div>
+                        <button
+                            class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                            class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <div class="separatore"></div>
+
+            <!--Cards "COME FUNZIONA"-->
+            <div class="prova" id="blu">
+
+                <div class="container text-center" id="card">
+
+                    <h4>COME FUNZIONA</h4>
+
+                    <div class="row" id="">
+
+                        <div class="col-lg-4">
+                            <div class="card" style="height: 400px;">
+                                <img class="card-img-top" src="imgs/sceglie2.png" alt="Scegli">
+                                <div class="card-body">
+                                    <h5 class="card-title">Scegli</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="card" style="height: 400px;">
+                                <img class="card-img-top" src="imgs/prenota2.png" alt="Prenota" style="height: 300;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Prenota</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="card" style="height: 400px;">
+                                <img class="card-img-top" src="imgs/vai2.png" alt="Vai">
+                                <div class="card-body">
+                                    <h5 class="card-title">e-VAI!</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="separatore"></div>
+
+        </div>
+
+        <!--Footer-->
+        <footer class="bg-primary text-center text-lg-white d-flex justify-content-center">
+            <div class="container " id="footer">
+                <a class="text-white">CONTATTI</a>
+                <a class="text-white">P.IVA</a>
+                <a
+                    class="btn btn-primary btn-floating m-1"
+                    style="background-color: #ac2bac;"
+                    href="#!"
+                    role="button">
+                    <i class="fab fa-instagram"></i >
+                </a>
+
+                <a
+                    class="btn btn-primary btn-floating m-1"
+                    style="background-color: #3b5998;"
+                    href="#!"
+                    role="button">
+                    <i class="fab fa-facebook-f"></i >
+                </a>
+                <a
+                    class="btn btn-primary btn-floating m-1"
+                    style="background-color: #983b3b;"
+                    href="#!"
+                    role="button">
+                    <i class="fab fa-youtube"></i >
+                </a>
+            </div>
+        </footer>
+		<script type="text/javascript">
+            var pulsante = document.getElementById("pulsante");
+			prova();
+        	function prova(){
+                var tipologia = document.getElementById("tipologia").value;
+                console.log(tipologia);
+                var alimentazione = document.getElementById("alimentazione").value;
+                console.log(alimentazione);
+	            if(tipologia == "null" || alimentazione == "null" ){
+	                pulsante.disabled=true;
+	            }
+	            else pulsante.disabled=false;
+        	}
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>

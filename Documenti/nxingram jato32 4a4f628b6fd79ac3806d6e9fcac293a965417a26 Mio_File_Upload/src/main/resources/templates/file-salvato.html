@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Veicoli</title>
+</head>
+<body>
+<h3>File salvato correttamente</h3>
+<p>nome: <span th:text="${veicolo.name}"></span></p>
+<p>foto:<span th:text="${veicolo.photo}"></span></p>
+<p>percorso file: <span th:text="${veicolo.photosImagePath}"></span> </p>
+<img th:src="@{${veicolo.photosImagePath}}" />
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Veicoli</title>
+</head>
+<body>
+<p>form</p>
+<form th:action="@{/mvc/veicolo/save}"
+    th:object="${veicolo}" method="post"
+    enctype="multipart/form-data"
+    >
+	
+	<label>Nome veicolo:</label>
+    <input type="text" th:field="*{name}" /><br/>
+     
+    <label>Photos: </label>
+    <input type="file" name="image" accept="image/png, image/jpeg" />
+     <br/><br/>
+    <button type="submit">Salva</button>  
+    
+</form>
+
+</body>
+</html>

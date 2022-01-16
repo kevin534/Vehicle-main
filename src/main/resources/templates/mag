@@ -1,0 +1,60 @@
+//Rotta della lista veicoli
+	@RequestMapping("/elenco/{pagina}/")
+	public String filtra(@RequestParam("alimentazione") String alimentazione, @RequestParam("tipologia") String tipologia, @PathVariable("pagina") int pagina, Model model, Utente utente) {
+		List<Veicolo> veicoli = veicoloService.impagina(pagina, 10);
+		System.out.println("veicoli: " + veicoli.toString());
+		//Filtro la lista dei veicoli da visualizzare, se utilizzo il filtro della home, altrimenti visualizzo tutti i veicoli disponibili
+		List<Veicolo> veicoliFiltrati = veicoloService.filtra(veicoli, alimentazione, tipologia); 
+		System.out.println("filtrati: " + veicoliFiltrati.toString());
+		int numPagine = (int)Math.ceil((double)veicoliFiltrati.size() / 10);
+		System.out.println(numPagine);
+		
+		model.addAttribute("numPagine", numPagine);
+		model.addAttribute("tipologie", veicoloService.cercaTipologie());
+		model.addAttribute("alimentazioni", veicoloService.cercaAlimentazioni());
+		model.addAttribute("veicoli", veicoliFiltrati);
+		return "listaVeicoli";
+	}
+
+
+//		Centrare mappa sulla posizione utente---------------------------------------------------------------------------------
+// 		ATTENZIONE
+// 		chrome://flags/
+// 			Allow invalid certificates for resources loaded from localhost.
+// 			Insecure origins treated as secure
+//		necessari per la geolocalizzazione
+//		disattivare dopo la presentazione!!
+
+		let latitudine;
+        let longitudine;
+		if(navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(showPosition);
+		}
+        function showPosition(position){
+        	console.log(position);
+	        latitudine = position.coords.latitude;
+	        longitudine = position.coords.longitude;
+	        console.log(latitudine);
+	        console.log(longitudine);
+	        var mymap = L
+            .map('mapid')
+            .setView([latitudine, longitudine], 13);
+            L.tileLayer(
+                    'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessTo' +
+                            'ken}',
+                    {
+                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMa' +
+                                'p</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                        maxZoom: 18,
+                        id: 'mapbox/streets-v11',
+                        tileSize: 512,
+                        zoomOffset: -1,
+                        accessToken: 'pk.eyJ1IjoiY2lnbGllcnMiLCJhIjoiY2tybms3Y3prMG1rODJucnE4NWVxcWloNiJ9.eRFXIAo1z2' +
+                                'bXBGegMd-7aA'
+                    }
+                )
+                .addTo(mymap);
+        }
+        console.log(latitudine);
+        console.log(longitudine);
+//----------------------------------------------------------------------------------------------------------------------------

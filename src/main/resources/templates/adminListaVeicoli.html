@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<link href='https://fonts.googleapis.com/css?family=Merienda One' rel='stylesheet'>		
+<link href='https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css' rel='stylesheet'>		
+<link rel="stylesheet" href="/style_AdminlistaVeicoli.css">
+
+<title>Lista Veicoli</title>
+</head>
+<body>
+
+	<div class="container my-3">
+		<script th:replace="/header"></script>
+	</div>
+
+	<div class="container my-4">
+		<script th:replace="/adminTabs"></script>
+		
+		<div class="container">
+			<h2 class=" mt-md-0 mb-4">Lista Veicoli</h2>
+			<!--<div class="separatore"></div>-->
+			<div class="table-responsive-lg text-center">
+			<div th:if="${numPagine} == 0">
+				<h3>La lista veicoli è vuota!</h3>
+				<h4>Aggiungi un nuovo veicolo per visualizzarlo</h4>
+				<a th:href="@{/admin/veicoli/gestisci/0}" class="btn" style= "color: white; background-color: #009EE3;">Aggiungi veicolo</a>
+			</div>
+			<div th:if="${numPagine} > 0">
+				<table class="table table-striped align-middle">
+					<thead>
+						<tr style= "color: white; background-color: #009EE3;">
+							<th scope="col">ID </th>
+							<th scope="col">Modello</th>
+							<th scope="col">Tipologia</th>
+							<th scope="col">Alimentazione</th>
+							<th scope="col">Posizione</th>
+							<th scope="col">Disponibilità</th>
+							<th scope="col">Modifica</th>
+							<th scope="col">Elimina</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="veicolo:${veicoli}">
+							<th scope="row" th:text="${veicolo.id_veicolo}" />
+							<td th:text="${veicolo.modello}" />
+							<td th:text="${veicolo.tipologia}" />
+							<td th:text="${veicolo.alimentazione}" />
+							<td th:text="${veicolo.posizione}" />
+							<td>
+								<i class="fas fa-check-square" th:if="${veicolo.disponibilita}"></i>
+							</td>
+							<td>
+								<a th:href="@{/admin/veicoli/gestisci/{id}(id=${veicolo.id_veicolo})}">
+									<i class="fas fa-edit"></i>
+								</a>
+							</td>
+							<td>
+								<a th:href="@{/admin/veicoli/elimina/{id}(id=${veicolo.id_veicolo})}">
+									<i class="fas fa-trash"></i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table> 
+				<div class="separatore"></div>
+
+				<!--PAGINATION-->
+				<div>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-md-end justify-content-center">
+							<li class="page-item disabled" th:if="${pagina} == 0">
+								<a class="page-link" aria-disabled="true">Indietro</a>
+							</li>
+							<li class="page-item" th:if="${pagina} > 0">
+								<a class="page-link" th:href="@{/admin/veicoli/{numPagina}(numPagina = ${pagina} - 1)}">Indietro</a>
+							</li>
+							<li class="page-item" th:each="numeroPagina: ${#numbers.sequence(1, numPagine)}">
+								<a id ="prova" class="page-link" th:href="@{/admin/veicoli/{numPagina}(numPagina = ${numeroPagina} - 1)}" th:text="${numeroPagina}" th:if="${pagina} == ${numeroPagina} - 1" style="font-weight: bold"></a>
+								<a class="page-link" th:href="@{/admin/veicoli/{numPagina}(numPagina = ${numeroPagina} - 1)}" th:text="${numeroPagina}" th:if="${pagina} != ${numeroPagina} - 1"></a>
+							</li>
+							<li class="page-item disabled" th:if="${pagina} == ${numPagine} - 1">
+								<a class="page-link" aria-disabled="true">Avanti</a>
+							</li>
+							<li class="page-item" th:if="${pagina} < ${numPagine} -1">
+								<a class="page-link" th:href="@{/admin/veicoli/{numPagina}(numPagina = ${pagina} + 1)}">Avanti</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous">
+</script>
+</body>
+
+</html>

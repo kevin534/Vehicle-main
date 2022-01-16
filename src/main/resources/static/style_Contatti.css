@@ -1,0 +1,16 @@
+.separatore{
+    height: 3rem;
+    
+}
+
+h3 {
+    font-family: 'Merienda One';
+}
+
+h1 {
+    font-family: 'Merienda One';
+}
+
+#mapid { 
+    height: 400px; 
+}

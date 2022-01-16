@@ -1,0 +1,12 @@
+LEGGIMI!!
+
+partire da biciclette perchè li ho modificato 
+la grandezza della descrizione da 200 a 600.
+
+I per i primi ho dovuto modificare la descrizione x id,
+perchè me dava errore se provavo a fare update passando
+l'alimnetzione.. ma poi per le macchine me l ha fatto..
+Boh misteri della fede!
+
+XOXO
+Rebecca 

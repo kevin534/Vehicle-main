@@ -1,0 +1,26 @@
+.separatore{
+    height: 3rem;
+    
+}
+
+h1 {
+    font-family: 'Merienda One';
+}
+
+h3 {
+    font-family: 'Merienda One';
+}
+
+.imgVeicolo{
+    height: 10px;
+}
+
+#mapid { 
+    height: 400px; 
+}
+
+#prenota{
+    width: 220px;
+    text-align: center;
+    align-items: center;
+}

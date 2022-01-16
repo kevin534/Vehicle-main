@@ -1,0 +1,90 @@
+<!--Header con navbar-->
+
+<header class="header">
+
+	<div class="row d-flex justify-content-end" id="header">
+		<nav class="navbar navbar-expand-lg navbar fixed-top navbar-dark" style= "background-color: #009EE3;" > <!-- nav è la barra di navigazione -->
+		  <div class="container">
+			<!--container-fluid = che è 100% larghezza-->
+			
+		
+			  <!-- qua ci sta il logo-->
+			   <a class="navbar-brand" href="/"><img src="/imgs/logoBianco_giallo.png" alt="logo" width="160px" class="d-inline-block align-text-top">
+			  </a>
+			
+			   <!-- qua spazio x allargare logo da link
+			<div class="col-lg-7 sectionText"></div>-->
+
+			  <!-- ora metto codice x menù tendina da mobile  -->
+			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse"  data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+				<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+		
+			  <!-- qua i link + flex x metterli a sinistra ( utilities su bootstrap)-->
+			  <div class="d-flex flex-row justify-content-end">
+				  <ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="/">Home</a>
+					</li>
+				   <li class="nav-item">
+					<a class="nav-link" href="/elenco/0/?tipologia=all&alimentazione=all">Lista Veicoli</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/contatti">Contatti</a>
+					</li>
+					<li class="nav-item" th:if="${utente.Id_utente == null || utente.Id_utente == 0}">
+						<a class="nav-link"
+							data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="">Login</a>
+					</li>
+					<li class="nav-item" th:if="${utente.Id_utente > 0}">
+						<a class="nav-link" href="/logout">Logout</a>
+					</li>
+					<li class="nav-item" th:if="${utente.Id_utente > 0}">
+						<a class="nav-link" href="/profilo">Profilo</a>
+					</li>
+					<li class="nav-item" th:if="${utente.Id_utente == 0}">
+						<a class="nav-link" href="/registrazione">Registrati</a>
+					</li>
+				  </ul>
+			  </div>
+		  </div>
+		</nav>
+	</div>  
+	
+	<!-- Modal-->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form action="/login" method="post" th:object="${login}">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">Inserisci i tuoi dati</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+
+
+					<div class="modal-body">
+						<input type="text" name="email" id="email" placeholder="Email">
+						<input type="password" name="password" id="password"
+							placeholder="Password">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Chiudi</button>
+						<button type="submit" class="btn" style="color:white; background-color: #009EE3;">Accedi</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>  
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous">
+    </script>
+</header>
+<br> <br> <br>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Insert title here</title>
+    </head>
+    <body>
+        <form action="/api/mvc/veicolo/filter" method="POST">
+            <select name="tipologia" id="tipologia">
+                <option value="" disabled selected>Scegli Veicolo</option>
+                <option value="automobile">Automobile</option>
+                <option value="motociclo">Motociclo</option>
+                <option value="monopattino">Monopattino</option>
+                <option value="bicicletta">Bicicletta</option>
+            </select>
+            <select name="alimentazione" id="alimentazione">
+                <option value="" disabled selected>Scegli Alimentazione</option>
+                <option value="benzina">Benzina</option>
+                <option value="diesel">Diesel</option>
+                <option value="elettrica">Elettrica</option>
+            </select>
+            <button type="submit">Cerca</button>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!--LEAFLET-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+
+
+    <link rel="stylesheet" href="style_pagSingola.css">
+
+    <!--GRAFICO (NON SO SE è QUELLO GIUSTO)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js" integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <title>E-ANDUMA_Singolo Veicolo</title>
+</head>
+
+<body>
+    <div class="container my-3">
+
+        <!--HEADER-->
+        <header class="header">
+
+            <div class="row" id="header">
+
+                <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary fixed-top">
+                    <div class="container-fluid">
+
+                        <a class="navbar-brand" href="#"><img src="imgs/logo.png" alt="logo" width="160px"
+                                class="d-inline-block align-text-top">
+                        </a>
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Home</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Chi siamo</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Servizi</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Contatti</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </nav>
+
+            </div>
+        </header>
+
+        <div class="separatore"></div>
+
+        <!--SEZIONE IMG + DESCRIZIONE-->
+        <div class="row d-flex align-items-center my-4" id="intro">
+
+            <div class="col-lg-6  order-lg-1 sectionImage row my-4">
+
+                <img class="img-fluid" src="imgs/bicicletta.png" alt="computer" id="imgVeicolo">
+
+            </div>
+
+            <div class="col-lg-6 sectionText d-flex flex-column text-center row my-4 ">
+
+
+                <h1>VEICOLO X</h1>
+                <br>
+                <!--    qua forse elenco?-->
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos mollitia error quisquam aut a
+                    qui perspiciatis placeat ex earum tenetur dolorum eveniet, molestiae beatae ipsa minus, velit totam
+                    eligendi necessitatibus.</p>
+
+            </div>
+
+
+
+        </div>
+
+        <div class="separatore"></div>
+
+
+        <!--SEZIONE TABELLA DISPONIBILITA'-->
+
+        <div class="row d-flex align-items-center my-4">
+
+            <table class="table table-striped ">
+                <thead>
+                    <tr class="bg-primary">
+                        <th scope="col">#</th>
+                        <th scope="col">Veicolo</th>
+                        <th scope="col">Alimentazione</th>
+                        <th scope="col">Disponibilità</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Monopattino</td>
+                        <td>elettrico</td>
+                        <td>Disponibile</td>
+                    </tr>
+                    <!--questo poi verrà cancellato-->
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+
+
+        </div>
+
+        <div class="separatore"></div>
+
+        <!--SEZIONE MAPPA-->
+        <div class=" row d-flex align-items-center my-4">
+
+            <div class="row sectionText d-flex flex-column text-center row my-4 ">
+                <h3>Dove si trovano i veicoli disponibili</h3>
+            </div>
+
+
+            <div class="row my-4">
+                <div id="mapid">
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+        <!--SEZIONE CONSUMI-->
+
+        <div class="row d-flex align-items-center my-4" id="consumi">
+
+            <div class="row sectionText d-flex flex-column text-center row my-4 ">
+                <h3>Perchè scegliere l'elettrico</h3>
+            </div>
+
+            <div class="col-lg-3 sectionImage row">
+                
+                <img class="img-fluid" src="imgs/PRENOTA.png" alt="computer" id="imgVeicolo">
+
+            </div>
+
+            <div class="col-lg-6 row">
+
+                <canvas id="myChart"></canvas>
+
+            </div>
+
+            <div class="col-lg-3 sectionImage row">
+
+                <img class="img-fluid" src="imgs/SCEGLI.png" alt="computer" id="imgVeicolo">
+
+            </div>
+
+
+
+        </div>
+
+        <!--
+        <div class="row d-flex align-items-center my-4">
+
+            <div class="row sectionText d-flex flex-column text-center row my-4 ">
+                <h3>Perchè scegliere l'elettrico</h3>
+            </div>
+
+
+            <div class="row my-4">
+
+                <canvas id="myChart"></canvas>
+
+            </div> 
+
+
+
+
+
+
+        </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <!--Footer-->
+    <footer class="bg-primary text-center text-lg-white d-flex justify-content-center">
+        <div class="container " id="footer">
+            <a class="text-white">CONTATTI</a>
+            <a class="text-white">P.IVA</a>
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac;" href="#!" role="button">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #983b3b;" href="#!" role="button">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <!--Leaflet-->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
+    <!--Grafico-->
+    
+
+    <script type="text/javascript">
+        //First we’ll initialize the map and set its view to our chosen geographical coordinates and a zoom level:    
+        var mymap = L.map('mapid').setView([45.116177, 7.742615], 13);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'pk.eyJ1IjoiY2lnbGllcnMiLCJhIjoiY2tybms3Y3prMG1rODJucnE4NWVxcWloNiJ9.eRFXIAo1z2bXBGegMd-7aA'
+        }).addTo(mymap);
+
+
+        //GRAFICO
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        var mychart = new Chart(
+        ctx,
+        {
+            type: 'doughnut',
+
+            data:{
+                
+                labels:['Bicicletta', 'Auto', 'Monopattino'],
+
+                datasets:[{
+                    label: 'my first dataset',
+                    data:[300, 50,100],
+                    backgroundColor:[
+                        'rgb(255,99,132)',
+                        'rgb(54,162,235)',
+                        'rgb(255,205,86)',
+                    ],
+                    hoverOffset:4
+                }]
+            }
+        }
+
+        )
+
+       
+
+    </script>
+</body>
+
+</html>

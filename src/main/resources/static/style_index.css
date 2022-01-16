@@ -1,0 +1,51 @@
+.separatore{
+    height: 5rem;
+    
+}
+
+.separator{
+  height: 3rem;
+  
+}
+
+h3 {
+    font-family: 'Merienda One';
+}
+
+.carousel-control-next, .carousel-control-prev {
+  top: unset;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #000;
+}
+
+.carousel-control-prev {
+    left: 50%;
+    transform: translateX(-100%);
+}
+.carousel-control-next {
+    right: 50%;
+    transform: translateX(100%);
+}
+
+
+
+
+/*@media screen and (max-width: 768px) {
+    .card {
+       
+     height: 50%;
+      
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .card-img-top{
+       
+     height: 50%;
+      
+    }
+  }*/

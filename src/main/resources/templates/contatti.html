@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="Description" content="Enter your description here"/>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous">
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+		<!--LEAFLET-->
+		<link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+            crossorigin=""/>
+        <link
+            href='https://fonts.googleapis.com/css?family=Merienda One'
+            rel='stylesheet'>
+        <link rel="stylesheet" href="style_Contatti.css">
+        <title>E-Anduma - Contatti</title>
+    </head>
+
+    <body>
+        <div class="container my-3">
+            <script th:replace="/header"></script>
+
+            <div class="separatore"></div>
+
+            <div class="d-flex flex-column">
+
+                <div class=" text-center ">
+                    <h1>Contattaci</h1>
+                    <br>
+                </div>
+
+                <!--SEZIONE CARD-->
+                <!--<div class="row order-sm-0">-->
+                <div class="row">
+
+                    <div class="col-md-3 my-3">
+                        <div class="card h-100">
+                            <img
+                                class="card-img-top"
+                                src="imgs/Contatti_sede.png"
+                                alt="Prenota"
+                                style="height: 200;"
+                                id="imgCell">
+                            <div class="card-body text-center" id="testo">
+                                <h5 class="card-title">LA NOSTRA SEDE</h5>
+                                <p class="card-text">Corso Ferrucci 23, Torino</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 my-3">
+                        <div class="card h-100">
+                            <img
+                                class="card-img-top"
+                                src="imgs/Contatti_orari.png"
+                                alt="Cell"
+                                style="height: 50;">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ORARI</h5>
+                                <p class="card-text">Lunedì - Venerdì | 9:30 - 15:00</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 my-3">
+                        <div class="card h-100">
+                            <img
+                                class="card-img-top"
+                                src="imgs/Contatti_tel.png"
+                                alt="Cell"
+                                style="height: 50;">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">TELEFONO</h5>
+                                <p class="card-text">011 944 21 66</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 my-3">
+                        <div class="card h-100">
+                            <img
+                                class="card-img-top"
+                                src="imgs/Contatti_email.png"
+                                alt="Cell"
+                                style="height: 50;">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">EMAIL</h5>
+                                <p class="card-text">info@eanduma.com</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="separatore"></div>
+                
+                <!--SEZIONE MAPPA-->
+                <!--<div class="container order-sm-1">-->
+                <div class="container">
+
+                    <div class="row my-3">
+                        <div id="mapid"></div>
+                    </div>
+
+                </div>
+
+            </div>
+   
+        </div>
+        <div class="separatore"></div>
+
+        <!--Footer-->
+        <footer class="text-lg-white py-2" style="background-color: #009EE3">
+            <div class="container" id="footer">
+
+                <div class="row">
+                    
+                    <div class="sectionText text-center d-flex col-sm-6 justify-content-sm-start justify-content-center  align-items-center">>
+
+                        <p class="text-white mb-0">e-anduma s.r.l. | P.I. ITA12345678900
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="d-flex col-sm-6 justify-content-sm-end justify-content-center align-items-center">
+                        <a
+                            class="btn btn-floating m-1 text-white"
+                            style="background-color: #009EE3"
+                            href="#!"
+                            role="button">
+                            <i class="fab fa-instagram"></i >
+                        </a>
+
+                        <a
+                            class="btn btn-floating m-1 text-white"
+                            style="background-color: #009EE3"
+                            href="#!"
+                            role="button">
+                            <i class="fab fa-facebook-f"></i >
+                        </a>
+                        <a
+                            class="btn btn-floating m-1 text-white"
+                            style="background-color: #009EE3"
+                            href="#!"
+                            role="button">
+                            <i class="fab fa-youtube"></i >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!--Bootstrap-->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+        <!--Leaflet-->
+        <script
+            src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+
+        <!--Grafico-->
+        <script type="text/javascript">
+        //Torino
+		var latitudine = 45.06653550;
+		var longitudine = 7.65515380;
+		var mymap = L
+            .map('mapid')
+            .setView([latitudine, longitudine], 13);
+            L.tileLayer(
+                    'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessTo' +
+                            'ken}',
+                    {
+                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMa' +
+                                'p</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                        maxZoom: 18,
+                        id: 'mapbox/streets-v11',
+                        tileSize: 512,
+                        zoomOffset: -1,
+                        accessToken: 'pk.eyJ1IjoiY2lnbGllcnMiLCJhIjoiY2tybms3Y3prMG1rODJucnE4NWVxcWloNiJ9.eRFXIAo1z2' +
+                                'bXBGegMd-7aA'
+                    }
+                )
+                .addTo(mymap);
+		var marker = L.marker([latitudine, longitudine]).addTo(mymap);
+        </script>
+
+    </body>
+
+</html>

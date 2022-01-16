@@ -1,0 +1,24 @@
+.separatore{
+    height: 3rem;
+    
+}
+
+h1 {
+    font-family: 'Merienda One';
+}
+
+img {
+    max-height: 100%;
+}
+
+@media (min-width: 420px){
+    img {
+        max-height: 30%;
+    }
+}
+
+@media (min-width: 760px){
+    img {
+        max-height: 10%;
+    }
+}
